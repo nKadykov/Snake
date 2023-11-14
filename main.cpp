@@ -23,21 +23,21 @@ int main() {
 	RenderWindow window(VideoMode(square * width, square * height), "Snake");
 
 	Texture texture;
-	texture.loadFromFile("E:/resources/Square.png");
+	texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Square.png");
 	Sprite title_sprite(texture);
 
 	Texture snake_texture;
-	snake_texture.loadFromFile("E:/resources/Snake.png");
+	snake_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Snake.png");
 	Sprite snake_sprite(snake_texture);
 
 	Texture target_texture;
-	target_texture.loadFromFile("E:/resources/Target.png");
+	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
 	Sprite target_sprite(target_texture);
 
 	Texture gameover_texture;
-	gameover_texture.loadFromFile("E:/resources/GameOver.png");
+	gameover_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/GameOver.png");
 	Sprite gameover_sprite(gameover_texture);
-	gameover_sprite.setPosition(0, 150);
+	gameover_sprite.setPosition(0, 175);
 
 	target.x = 1;
 	target.y = 1;
@@ -95,8 +95,10 @@ int main() {
 			window.draw(snake_sprite);
 
 		}
-
-		target_sprite.setPosition(target.x * 1, target.y * 1);
+		float target_width = 0.062;
+		float target_height = 0.065;
+		target_sprite.setScale(target_width, target_height);
+		target_sprite.setPosition(target.x * square, target.y * square);
 		window.draw(target_sprite);
 
 		if (!game) {
