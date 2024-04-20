@@ -1,24 +1,39 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "target.h"
+enum SnakeState {ON, OFF, LOSE};
 
-extern int direction;
-extern bool game;
+class Snake
+{
+private:
+	struct SnakePoint {
+		int x;
+		int y;
+	};
+	std::vector<SnakePoint> snake_vector;
+	int snake_direction = 2;
+	int snake_width = 30;
+	int snake_height = 30;
+	int snake_square = 25;
+	int snake_length = 4;
+	SnakeState snake_state = SnakeState::ON;
 
-extern const int width;
-extern const int height;
-extern int square;
+	sf::Sprite snake_sprite;
+public:
+	Snake() = delete;
+	Snake(int, int, int, int, int, int, int, sf::Sprite&);
+	Snake(const Snake&) = delete;
+	Snake(Snake&&) = delete;
+	Snake& operator=(const Snake&) = delete;
+	Snake& operator=(Snake&&) = delete;
+	~Snake() = default;
 
-extern int number;
+	void setDirection(int);
 
-static struct Snake {
-	int x, y;
+	int getDirection() const;
+	SnakeState getState() const;
+
+	void Start(sf::RenderWindow&);
+	void draw(sf::RenderWindow&);
 };
 
-static struct Target {
-	int x, y;
-};
-
-extern Snake snake[600];
-extern Target target;
-
-void Game();

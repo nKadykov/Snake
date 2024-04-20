@@ -1,114 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include "snake.h"
 
-using namespace sf;
-
-
-int direction = 2;
-bool game = true;
-
-const int width = 30;
-const int height = 20;
-int square = 25;
-
-int number = 4;
-
-Snake snake[600];
-Target target;
+const int snake_width = 30;
+const int snake_height = 20;
+const int snake_square = 25;
+const int snake_length = 4;
 
 int main() {
 
 	srand(time(NULL));
 
-	RenderWindow window(VideoMode(square * width, square * height), "Snake");
+	sf::RenderWindow window(sf::VideoMode(snake_square * snake_width, snake_square * snake_height), "Snake");
 
-	Texture texture;
-	texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Square.png");
-	Sprite title_sprite(texture);
-
-	Texture snake_texture;
+	sf::Texture snake_texture;
 	snake_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Snake.png");
-	Sprite snake_sprite(snake_texture);
+	sf::Sprite snake_sprite(snake_texture);
 
-	Texture target_texture;
-	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
-	Sprite target_sprite(target_texture);
+	Snake snake(2, snake_width, snake_height, snake_square, snake_length, 1, 1, snake_sprite);
 
-	Texture gameover_texture;
-	gameover_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/GameOver.png");
-	Sprite gameover_sprite(gameover_texture);
-	gameover_sprite.setScale(2.7, 2.7);
-	gameover_sprite.setPosition(0, 175);
-
-
-	target.x = 1;
-	target.y = 1;
-
-	Clock clock;
-	float timer = 0;
-	float delay = 0.1;
-
-	while (window.isOpen()) {
-		float time = clock.getElapsedTime().asSeconds();
-		clock.restart();
-		timer += time;
-
-		Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == Event::Closed) {
-				window.close();
-			}
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::Left)) {
-			direction = 1;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Right)) {
-			direction = 2;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Up)) {
-			direction = 3;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Down)) {
-			direction = 0;
-		}
-
-		if (timer > delay && game) {
-			timer = 0;
-			Game();
-		}
-
-		window.clear();
-
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				title_sprite.setPosition(i * square, j * square);
-				window.draw(title_sprite);
-			}
-		}
-
-		for (int i = 0; i < number; i++) {
-			snake_sprite.setTextureRect(IntRect(0, 0, square, square));
-		
-			if (!game && i == 1) {
-				snake_sprite.setTextureRect(IntRect(direction * square, square * 2, square, square));
-			}
-			snake_sprite.setPosition(snake[i].x * square, snake[i].y * square);
-			window.draw(snake_sprite);
-
-		}
-		float target_width = 0.062;
-		float target_height = 0.065;
-		target_sprite.setScale(target_width, target_height);
-		target_sprite.setPosition(target.x * square, target.y * square);
-		window.draw(target_sprite);
-
-		if (!game) {
-			window.draw(gameover_sprite);
-		}
-
-		window.display();
-	}
+	snake.Start(window);
 
 	return 0;
 }
