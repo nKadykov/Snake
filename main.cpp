@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Snake.h"
+#include "snake.h"
 
 using namespace sf;
 
@@ -37,7 +37,9 @@ int main() {
 	Texture gameover_texture;
 	gameover_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/GameOver.png");
 	Sprite gameover_sprite(gameover_texture);
+	gameover_sprite.setScale(2.7, 2.7);
 	gameover_sprite.setPosition(0, 175);
+
 
 	target.x = 1;
 	target.y = 1;
