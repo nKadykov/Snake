@@ -34,6 +34,6 @@ public:
 	SnakeState getState() const;
 
 	void Start(sf::RenderWindow&);
-	void draw(sf::RenderWindow&);
+	void draw(sf::RenderWindow&) const;
 };
 

@@ -19,5 +19,6 @@ void Target::setTargetPoint(int target_x, int target_y) {
 
 void Target::draw(sf::RenderWindow& window) {
 	target_sprite.setScale(target_width, target_height);
+	target_sprite.setPosition(target_point.x * 25, target_point.y * 25);
 	window.draw(target_sprite);
 }

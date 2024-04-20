@@ -32,7 +32,7 @@ void Snake::Start(sf::RenderWindow& window) {
 	sf::Texture target_texture;
 	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
 	sf::Sprite target_sprite(target_texture);
-	Target target(1, 1, 0.066, 0.067, target_sprite);
+	Target target(1, 1, 0.064, 0.066, target_sprite);
 	TargetPoint target_point = target.getTargetPoint();
 
 	sf::Texture texture;
@@ -51,12 +51,9 @@ void Snake::Start(sf::RenderWindow& window) {
 
 	int snake_direction = 2;
 
-;	for (int i = snake_length; i > 0; i--) {
-		snake_vector[i].x = snake_vector[i - 1].x;
-		snake_vector[i].y = snake_vector[i - 1].y;
-	}
-
 	while (window.isOpen()) {
+
+		target_point = target.getTargetPoint();
 
 		float time = clock.getElapsedTime().asSeconds();
 		clock.restart();
@@ -83,8 +80,10 @@ void Snake::Start(sf::RenderWindow& window) {
 		}
 
 		if (timer > delay && snake_state == ON) {
-			target_point = target.getTargetPoint();
+
 			timer = 0;
+
+			target_point = target.getTargetPoint();
 
 			for (int i = snake_length; i > 0; i--) {
 				snake_vector[i].x = snake_vector[i - 1].x;
@@ -160,6 +159,6 @@ void Snake::Start(sf::RenderWindow& window) {
 
 }
 
-void Snake::draw(sf::RenderWindow& window) {
+void Snake::draw(sf::RenderWindow& window) const {
 	window.draw(snake_sprite);
 }
