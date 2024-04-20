@@ -1,5 +1,6 @@
 #include "snake.h"
 #include "target.h"
+#include <SFML/Audio.hpp>
 
 Snake::Snake(int direction, int width, int height, int square, int length, int point_x, int point_y, sf::Sprite& sprite) {
 	snake_direction = direction;
@@ -19,6 +20,10 @@ void Snake::setDirection(int direction) {
 	snake_direction = direction;
 }
 
+void Snake::setState(SnakeState state) {
+	snake_state = state;
+}
+
 int Snake::getDirection() const {
 	return snake_direction;
 }
@@ -28,6 +33,11 @@ SnakeState Snake::getState() const {
 }
 
 void Snake::Start(sf::RenderWindow& window) {
+
+	sf::Music music;
+	music.openFromFile("resources/back1.mp3");
+	music.play();
+
 
 	sf::Texture target_texture;
 	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
@@ -51,7 +61,7 @@ void Snake::Start(sf::RenderWindow& window) {
 
 	int snake_direction = 2;
 
-	while (window.isOpen()) {
+	while (window.isOpen() && snake_state == SnakeState::ON) {
 
 		target_point = target.getTargetPoint();
 
@@ -64,6 +74,13 @@ void Snake::Start(sf::RenderWindow& window) {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			window.close();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+			snake_state = SnakeState::MENU;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
@@ -123,9 +140,9 @@ void Snake::Start(sf::RenderWindow& window) {
 				target.setTargetPoint(rand() % snake_width, rand() % snake_height);
 			}
 
-			for (int i = 1; i < snake_length; i++) {
+			for (int i = 2; i < snake_length; i++) {
 				if ((snake_vector[0].x == snake_vector[i].x) && (snake_vector[0].y == snake_vector[i].y)) {
-					snake_state = SnakeState::OFF;
+					snake_state = SnakeState::LOSE;
 				}
 			}
 		}
@@ -141,18 +158,11 @@ void Snake::Start(sf::RenderWindow& window) {
 
 		for (int i = 0; i < snake_length; i++) {
 			snake_sprite.setTextureRect(sf::IntRect(0, 0, snake_square, snake_square));
-			if (snake_state == SnakeState::OFF && i == 1) {
-				snake_sprite.setTextureRect(sf::IntRect(snake_direction * snake_square, snake_square * 2, snake_square, snake_square));
-			}
 			snake_sprite.setPosition(snake_vector[i].x * snake_square, snake_vector[i].y * snake_square);
 			this->draw(window);
 		}
 
 		target.draw(window);
-
-		if (snake_state == SnakeState::LOSE) {
-			window.draw(gameover_sprite);
-		}
 
 		window.display();
 	}

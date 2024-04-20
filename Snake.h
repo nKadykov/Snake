@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "target.h"
-enum SnakeState {ON, OFF, LOSE};
+enum SnakeState {ON, MENU, LOSE};
 
 class Snake
 {
@@ -29,6 +29,7 @@ public:
 	~Snake() = default;
 
 	void setDirection(int);
+	void setState(SnakeState);
 
 	int getDirection() const;
 	SnakeState getState() const;

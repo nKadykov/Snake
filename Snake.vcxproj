@@ -135,11 +135,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="button.cpp" />
+    <ClCompile Include="gameoverwindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="target.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="button.h" />
+    <ClInclude Include="gameoverwindow.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="target.h" />
   </ItemGroup>
