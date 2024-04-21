@@ -3,9 +3,9 @@
 #include "menu.h"
 #include "gameoverwindow.h"
 
-const int snake_width = 1280 / 25;
-const int snake_height = 720 / 25;
-const int snake_square = 25;
+const int snake_square = 50;
+const int snake_width = 1280 / snake_square;
+const int snake_height = 720 / snake_square;
 const int snake_length = 4;
 
 enum class GameState {MENU, SNAKE, GAME_OVER};

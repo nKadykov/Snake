@@ -12,6 +12,7 @@ private:
 	TargetPoint target_point{ 1, 1 };
 	float target_width = 0.062;
 	float target_height = 0.065;
+	float target_square;
 
 	sf::Sprite target_sprite;
 public:
@@ -25,6 +26,7 @@ public:
 
 	TargetPoint getTargetPoint() const;
 	void setTargetPoint(int, int);
+	void setTargetSquare(float);
 
 	void draw(sf::RenderWindow&);
 };

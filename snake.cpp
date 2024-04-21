@@ -42,7 +42,9 @@ void Snake::Start(sf::RenderWindow& window) {
 	sf::Texture target_texture;
 	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
 	sf::Sprite target_sprite(target_texture);
-	Target target(1, 1, 0.064, 0.066, target_sprite);
+	target_sprite.setScale(snake_square / 25, snake_square / 25);
+	Target target(1, 1, 0.065, 0.067, target_sprite);
+	target.setTargetSquare(snake_square);
 	TargetPoint target_point = target.getTargetPoint();
 
 	sf::Texture texture;
@@ -151,13 +153,14 @@ void Snake::Start(sf::RenderWindow& window) {
 
 		for (int i = 0; i < snake_width; i++) {
 			for (int j = 0; j < snake_height; j++) {
+				title_sprite.setScale(static_cast<float>(snake_square) / 25.0, static_cast<float>(snake_square) / 25.0);
 				title_sprite.setPosition(i * snake_square, j * snake_square);
 				window.draw(title_sprite);
 			}
 		}
 
 		for (int i = 0; i < snake_length; i++) {
-			snake_sprite.setTextureRect(sf::IntRect(0, 0, snake_square, snake_square));
+			snake_sprite.setScale(static_cast<float>(snake_square) / (25.0 * 7.0), static_cast<float>(snake_square) / (25.0 * 7.3));
 			snake_sprite.setPosition(snake_vector[i].x * snake_square, snake_vector[i].y * snake_square);
 			this->draw(window);
 		}

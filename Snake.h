@@ -14,7 +14,7 @@ private:
 	int snake_direction = 2;
 	int snake_width = 30;
 	int snake_height = 30;
-	int snake_square = 25;
+	int snake_square;
 	int snake_length = 4;
 	SnakeState snake_state = SnakeState::ON;
 
