@@ -62,6 +62,7 @@ int main() {
 			gameover_window.setState(GameOverState::ON);
 			delete pSnake;
 		}
+
 		else if (gameover_state == GameOverState::OFF || button_state == ButtonState::START_GAME) {
 			game_state = GameState::SNAKE;
 			menu.setButtonState(ButtonState::NONE);
