@@ -69,6 +69,7 @@ int main() {
 				delete pSnake;
 				pSnake = NULL;
 			}
+			snake_state = SnakeState::ON;
 		}
 
 		else if (gameover_state == GameOverState::OFF || button_state == ButtonState::START_GAME) {
