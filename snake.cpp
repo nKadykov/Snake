@@ -139,7 +139,16 @@ void Snake::Start(sf::RenderWindow& window) {
 
 			if ((snake_vector[0].x == target_point.x) && (snake_vector[0].y == target_point.y)) {
 				snake_length++;
-				target.setTargetPoint(rand() % snake_width, rand() % snake_height);
+				int target_x = rand() % snake_width;
+				int target_y = rand() % snake_width;
+				for (int i = 0; i < snake_length; i++) {
+					if (target_x == snake_vector[i].x && target_y == snake_vector[i].y) {
+						target_x = rand() % snake_width;
+						target_y = rand() % snake_width;
+						i = 0;
+					}
+				}
+				target.setTargetPoint(rand() % (snake_width * snake_square / snake_square), rand() % (snake_height * snake_square / snake_square));
 			}
 
 			for (int i = 2; i < snake_length; i++) {

@@ -33,6 +33,8 @@ int main() {
 	GameState game_state = GameState::MENU;
 	Snake* pSnake = new Snake(2, snake_width, snake_height, snake_square, snake_length, 1, 1, snake_sprite);
 
+	SnakeState snake_state = SnakeState::ON;
+
 	while (window.isOpen()) {
 
 		sf::Event event;
@@ -46,21 +48,27 @@ int main() {
 			window.close();
 		}
 
-		SnakeState snake_state = pSnake->getState();
+		if (pSnake) {
+			snake_state = pSnake->getState();
+		}
 		MenuState menu_state = menu.getState();
 		ButtonState button_state = menu.getButtonState();
 		GameOverState gameover_state = gameover_window.getState();
 
-		if (snake_state == SnakeState::LOSE) {
+		if (snake_state == SnakeState::LOSE && pSnake) {
 			game_state = GameState::GAME_OVER;
-			pSnake->setState(SnakeState::ON);
-			delete pSnake;
+			if (pSnake) {
+				delete pSnake;
+				pSnake = NULL;
+			}
 		}
 		else if (snake_state == SnakeState::MENU || gameover_state == GameOverState::MENU) {
 			game_state = GameState::MENU;
-			pSnake->setState(SnakeState::ON);
 			gameover_window.setState(GameOverState::ON);
-			delete pSnake;
+			if (pSnake) {
+				delete pSnake;
+				pSnake = NULL;
+			}
 		}
 
 		else if (gameover_state == GameOverState::OFF || button_state == ButtonState::START_GAME) {
@@ -86,6 +94,10 @@ int main() {
 		}
 
 		window.display();
+	}
+	if (pSnake) {
+		delete pSnake;
+		pSnake = NULL;
 	}
 	return 0;
 }
