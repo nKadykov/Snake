@@ -9,11 +9,11 @@ enum ButtonState { NONE, START_GAME, CLOSE };
 class Menu
 {
 private:
-	std::vector<Button*> buttonVector;
-	sf::Texture menuTexture;
-	sf::Sprite menuSprite;
-	ButtonState buttonState;
-	MenuState menuState;
+	std::vector<Button*> button_vector;
+	sf::Texture menu_texture;
+	sf::Sprite menu_sprite;
+	ButtonState button_state;
+	MenuState menu_state;
 public:
 	Menu();
 	Menu(std::string);

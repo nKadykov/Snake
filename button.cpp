@@ -1,17 +1,17 @@
 #include "button.h"
 
 Button::Button(int buttonX, int buttonY, std::string filename) {
-	if (!buttonTexture.loadFromFile(filename)) {
+	if (!button_texture.loadFromFile(filename)) {
 		exit(1);
 	}
-	buttonSprite.setTexture(buttonTexture);
-	buttonSprite.setPosition(buttonX, buttonY);
+	button_sprite.setTexture(button_texture);
+	button_sprite.setPosition(buttonX, buttonY);
 }
 
 void Button::setButtonPosition(int buttonX, int buttonY) {
-	buttonSprite.setPosition(buttonX, buttonY);
+	button_sprite.setPosition(buttonX, buttonY);
 }
 
 void Button::draw(sf::RenderWindow& window) {
-	window.draw(buttonSprite);
+	window.draw(button_sprite);
 }
