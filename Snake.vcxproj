@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\button.cpp" />
+    <ClCompile Include="src\gameoverwindow.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menu.cpp" />
+    <ClCompile Include="src\snake.cpp" />
+    <ClCompile Include="src\target.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\button.h" />
+    <ClInclude Include="src\gameoverwindow.h" />
+    <ClInclude Include="src\menu.h" />
+    <ClInclude Include="src\Snake.h" />
+    <ClInclude Include="src\target.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -134,21 +149,6 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="button.cpp" />
-    <ClCompile Include="gameoverwindow.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="snake.cpp" />
-    <ClCompile Include="target.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="button.h" />
-    <ClInclude Include="gameoverwindow.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="snake.h" />
-    <ClInclude Include="target.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
