@@ -43,4 +43,4 @@ https://www.sfml-dev.org/download.php
 https://www.sfml-dev.org/tutorials/2.6/start-vc.php
 
 # Клонирование репозитория
-git clone https://github.com/nKadykov/BulletHell.git
+git clone https://github.com/nKadykov/snake.git
