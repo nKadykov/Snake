@@ -12,7 +12,7 @@ enum class GameState {MENU, SNAKE, GAME_OVER};
 
 int main() {
 
-	srand(time(NULL));
+	srand(time(nullptr));
 
 	sf::RenderWindow window(sf::VideoMode(snake_square * snake_width, snake_square * snake_height), "Snake");
 
@@ -59,7 +59,7 @@ int main() {
 			game_state = GameState::GAME_OVER;
 			if (pSnake) {
 				delete pSnake;
-				pSnake = NULL;
+				pSnake = nullptr;
 			}
 		}
 		else if (snake_state == SnakeState::MENU || gameover_state == GameOverState::MENU) {
@@ -67,7 +67,7 @@ int main() {
 			gameover_window.setState(GameOverState::ON);
 			if (pSnake) {
 				delete pSnake;
-				pSnake = NULL;
+				pSnake = nullptr;
 			}
 			snake_state = SnakeState::ON;
 		}
@@ -98,7 +98,7 @@ int main() {
 	}
 	if (pSnake) {
 		delete pSnake;
-		pSnake = NULL;
+		pSnake = nullptr;
 	}
 	return 0;
 }
