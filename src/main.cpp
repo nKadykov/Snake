@@ -22,7 +22,7 @@ int main() {
 
 	sf::Texture gameover_texture;
 	gameover_texture.loadFromFile("resources/back1.jpg");
-	sf::Sprite gameover_texture_sprite(gameover_texture);
+	sf::Sprite gameover_sprite(gameover_texture);
 
 	Menu menu("resources/back1.jpg");
 	menu.addButton(500, 200, "resources/button2.png");
