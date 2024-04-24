@@ -40,7 +40,7 @@ void Snake::Start(sf::RenderWindow& window) {
 
 
 	sf::Texture target_texture;
-	target_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Target.png");
+	target_texture.loadFromFile("resources/Target.png");
 	sf::Sprite target_sprite(target_texture);
 	target_sprite.setScale(snake_square / 25, snake_square / 25);
 	Target target(1, 1, 0.065, 0.067, target_sprite);
@@ -48,11 +48,11 @@ void Snake::Start(sf::RenderWindow& window) {
 	TargetPoint target_point = target.getTargetPoint();
 
 	sf::Texture texture;
-	texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Square.png");
+	texture.loadFromFile("resources/Square.png");
 	sf::Sprite title_sprite(texture);
 
 	sf::Texture gameover_texture;
-	gameover_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/GameOver.png");
+	gameover_texture.loadFromFile("resources/GameOver.png");
 	sf::Sprite gameover_sprite(gameover_texture);
 	gameover_sprite.setScale(2.7, 2.7);
 	gameover_sprite.setPosition(0, 175);

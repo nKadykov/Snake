@@ -17,7 +17,7 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(snake_square * snake_width, snake_square * snake_height), "Snake");
 
 	sf::Texture snake_texture;
-	snake_texture.loadFromFile("E:/C/Visual Studio/Snake/resources/Snake.png");
+	snake_texture.loadFromFile("resources/Snake.png");
 	sf::Sprite snake_sprite(snake_texture);
 
 	sf::Texture gameover_texture;

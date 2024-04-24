@@ -51,4 +51,33 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\back1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Again.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\back1.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\Button2.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\Button3.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\GameOver.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\Snake.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\Square.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\Target.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
