@@ -3,33 +3,33 @@
 #include <SFML/Audio.hpp>
 
 Snake::Snake(int direction, int width, int height, int square, int length, int point_x, int point_y, sf::Sprite& sprite) {
-	snake_direction = direction;
-	snake_width = width;
-	snake_height = height;
-	snake_square = square;
-	snake_length = length;
-	snake_state = SnakeState::ON;
-	snake_vector.resize(100);
-	for (int i = 0; i < snake_length; i++) {
-		snake_vector.push_back(SnakePoint());
+	m_snake_direction = direction;
+	m_snake_width = width;
+	m_snake_height = height;
+	m_snake_square = square;
+	m_snake_length = length;
+	m_snake_state = SnakeState::ON;
+	m_snake_vector.resize(100);
+	for (int i = 0; i < m_snake_length; i++) {
+		m_snake_vector.push_back(SnakePoint());
 	}
-	snake_sprite = sprite;
+	m_snake_sprite = sprite;
 }
 
 void Snake::setDirection(int direction) {
-	snake_direction = direction;
+	m_snake_direction = direction;
 }
 
 void Snake::setState(SnakeState state) {
-	snake_state = state;
+	m_snake_state = state;
 }
 
 int Snake::getDirection() const {
-	return snake_direction;
+	return m_snake_direction;
 }
 
 SnakeState Snake::getState() const {
-	return snake_state;
+	return m_snake_state;
 }
 
 void Snake::Start(sf::RenderWindow& window) {
@@ -42,9 +42,9 @@ void Snake::Start(sf::RenderWindow& window) {
 	sf::Texture target_texture;
 	target_texture.loadFromFile("resources/Target.png");
 	sf::Sprite target_sprite(target_texture);
-	target_sprite.setScale(snake_square / 25, snake_square / 25);
+	target_sprite.setScale(m_snake_square / 25, m_snake_square / 25);
 	Target target(1, 1, 0.065, 0.067, target_sprite);
-	target.setTargetSquare(snake_square);
+	target.setTargetSquare(m_snake_square);
 	TargetPoint target_point = target.getTargetPoint();
 
 	sf::Texture texture;
@@ -61,9 +61,7 @@ void Snake::Start(sf::RenderWindow& window) {
 	float timer = 0;
 	float delay = 0.1;
 
-	int snake_direction = 2;
-
-	while (window.isOpen() && snake_state == SnakeState::ON) {
+	while (window.isOpen() && m_snake_state == SnakeState::ON) {
 
 		target_point = target.getTargetPoint();
 
@@ -82,95 +80,95 @@ void Snake::Start(sf::RenderWindow& window) {
 			window.close();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-			snake_state = SnakeState::MENU;
+			m_snake_state = SnakeState::MENU;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-			snake_direction = 1;
+			m_snake_direction = 1;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-			snake_direction = 2;
+			m_snake_direction = 2;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			snake_direction = 3;
+			m_snake_direction = 3;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			snake_direction = 0;
+			m_snake_direction = 0;
 		}
 
-		if (timer > delay && snake_state == ON) {
+		if (timer > delay && m_snake_state == ON) {
 
 			timer = 0;
 
 			target_point = target.getTargetPoint();
 
-			for (int i = snake_length; i > 0; i--) {
-				snake_vector[i].x = snake_vector[i - 1].x;
-				snake_vector[i].y = snake_vector[i - 1].y;
+			for (int i = m_snake_length; i > 0; i--) {
+				m_snake_vector[i].x = m_snake_vector[i - 1].x;
+				m_snake_vector[i].y = m_snake_vector[i - 1].y;
 			}
 
-			switch (snake_direction) {
+			switch (m_snake_direction) {
 			case 0:
-				snake_vector[0].y += 1;
+				m_snake_vector[0].y += 1;
 				break;
 			case 1:
-				snake_vector[0].x -= 1;
+				m_snake_vector[0].x -= 1;
 				break;
 			case 2:
-				snake_vector[0].x += 1;
+				m_snake_vector[0].x += 1;
 				break;
 			case 3:
-				snake_vector[0].y -= 1;
+				m_snake_vector[0].y -= 1;
 				break;
 			}
 
-			if (snake_vector[0].x > snake_width - 1) {
-				snake_vector[0].x = 0;
+			if (m_snake_vector[0].x > m_snake_width - 1) {
+				m_snake_vector[0].x = 0;
 			}
-			if (snake_vector[0].x < 0) {
-				snake_vector[0].x = snake_width;
+			if (m_snake_vector[0].x < 0) {
+				m_snake_vector[0].x = m_snake_width;
 			}
-			if (snake_vector[0].y > snake_height - 1) {
-				snake_vector[0].y = 0;
+			if (m_snake_vector[0].y > m_snake_height - 1) {
+				m_snake_vector[0].y = 0;
 			}
-			if (snake_vector[0].y < 0) {
-				snake_vector[0].y = snake_height;
+			if (m_snake_vector[0].y < 0) {
+				m_snake_vector[0].y = m_snake_height;
 			}
 
-			if ((snake_vector[0].x == target_point.x) && (snake_vector[0].y == target_point.y)) {
-				snake_length++;
-				int target_x = rand() % snake_width;
-				int target_y = rand() % snake_width;
-				for (int i = 0; i < snake_length; i++) {
-					if (target_x == snake_vector[i].x && target_y == snake_vector[i].y) {
-						target_x = rand() % snake_width;
-						target_y = rand() % snake_width;
+			if ((m_snake_vector[0].x == target_point.x) && (m_snake_vector[0].y == target_point.y)) {
+				m_snake_length++;
+				int target_x = rand() % m_snake_width;
+				int target_y = rand() % m_snake_width;
+				for (int i = 0; i < m_snake_length; i++) {
+					if (target_x == m_snake_vector[i].x && target_y == m_snake_vector[i].y) {
+						target_x = rand() % m_snake_width;
+						target_y = rand() % m_snake_width;
 						i = 0;
 					}
 				}
-				target.setTargetPoint(rand() % (snake_width * snake_square / snake_square), rand() % (snake_height * snake_square / snake_square));
+				target.setTargetPoint(rand() % (m_snake_width * m_snake_square / m_snake_square), rand() % (m_snake_height * m_snake_square / m_snake_square));
 			}
 
-			for (int i = 2; i < snake_length; i++) {
-				if ((snake_vector[0].x == snake_vector[i].x) && (snake_vector[0].y == snake_vector[i].y)) {
-					snake_state = SnakeState::LOSE;
+			for (int i = 2; i < m_snake_length; i++) {
+				if ((m_snake_vector[0].x == m_snake_vector[i].x) && (m_snake_vector[0].y == m_snake_vector[i].y)) {
+					m_snake_state = SnakeState::LOSE;
 				}
 			}
 		}
 
 		window.clear();
 
-		for (int i = 0; i < snake_width; i++) {
-			for (int j = 0; j < snake_height; j++) {
-				title_sprite.setScale(static_cast<float>(snake_square) / 25.0, static_cast<float>(snake_square) / 25.0);
-				title_sprite.setPosition(i * snake_square, j * snake_square);
+		for (int i = 0; i < m_snake_width; i++) {
+			for (int j = 0; j < m_snake_height; j++) {
+				title_sprite.setScale(static_cast<float>(m_snake_square) / 25.0, static_cast<float>(m_snake_square) / 25.0);
+				title_sprite.setPosition(i * m_snake_square, j * m_snake_square);
 				window.draw(title_sprite);
 			}
 		}
 
-		for (int i = 0; i < snake_length; i++) {
-			snake_sprite.setScale(static_cast<float>(snake_square) / (25.0 * 7.0), static_cast<float>(snake_square) / (25.0 * 7.3));
-			snake_sprite.setPosition(snake_vector[i].x * snake_square, snake_vector[i].y * snake_square);
+		for (int i = 0; i < m_snake_length; i++) {
+			m_snake_sprite.setScale(static_cast<float>(m_snake_square) / (25.0 * 7.0), static_cast<float>(m_snake_square) / (25.0 * 7.3));
+			m_snake_sprite.setPosition(m_snake_vector[i].x * m_snake_square, m_snake_vector[i].y * m_snake_square);
 			this->draw(window);
 		}
 
@@ -182,5 +180,5 @@ void Snake::Start(sf::RenderWindow& window) {
 }
 
 void Snake::draw(sf::RenderWindow& window) const {
-	window.draw(snake_sprite);
+	window.draw(m_snake_sprite);
 }

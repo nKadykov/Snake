@@ -9,12 +9,11 @@ struct TargetPoint {
 class Target
 {
 private:
-	TargetPoint target_point{ 1, 1 };
-	float target_width = 0.062;
-	float target_height = 0.065;
-	float target_square;
-
-	sf::Sprite target_sprite;
+	TargetPoint m_target_point{ 1, 1 };
+	float m_target_width = 0.062;
+	float m_target_height = 0.065;
+	float m_target_square;
+	sf::Sprite m_target_sprite;
 public:
 	Target() = delete;
 	Target(int, int, float, float, sf::Sprite&);

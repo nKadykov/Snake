@@ -1,61 +1,61 @@
 #include "menu.h"
 
 Menu::Menu() {
-	menu_state = MenuState::ON;
-	button_state = ButtonState::NONE;
-	menu_texture.loadFromFile("resources/back1.jpg");
-	menu_sprite.setTexture(menu_texture);
+	m_menu_state = MenuState::ON;
+	m_button_state = ButtonState::NONE;
+	m_menu_texture.loadFromFile("resources/back1.jpg");
+	m_menu_sprite.setTexture(m_menu_texture);
 }
 
 Menu::Menu(std::string filename) {
-	menu_state = MenuState::OFF;
-	button_state = ButtonState::NONE;
-	menu_texture.loadFromFile(filename);
-	menu_sprite.setTexture(menu_texture);
+	m_menu_state = MenuState::OFF;
+	m_button_state = ButtonState::NONE;
+	m_menu_texture.loadFromFile(filename);
+	m_menu_sprite.setTexture(m_menu_texture);
 }
 
 Menu::~Menu() {
-	for (auto it = button_vector.begin(); it != button_vector.end(); it++) {
+	for (auto it = m_button_vector.begin(); it != m_button_vector.end(); it++) {
 		delete* it;
 	}
 }
 
 void Menu::addButton(int buttonX, int buttonY, std::string filename) {
-	Button* newButton = new Button(buttonX, buttonY, filename);
-	button_vector.push_back(newButton);
+	Button* new_button = new Button(buttonX, buttonY, filename);
+	m_button_vector.push_back(new_button);
 }
 
 ButtonState Menu::getButtonState() const {
-	return button_state;
+	return m_button_state;
 }
 
 MenuState Menu::getState() const {
-	return menu_state;
+	return m_menu_state;
 }
 
 void Menu::setButtonState(ButtonState state) {
-	button_state = state;
+	m_button_state = state;
 }
 
 void Menu::setState(MenuState state) {
-	menu_state = state;
+	m_menu_state = state;
 }
 
 void Menu::draw(sf::RenderWindow& window) {
 	window.clear();
-	button_state = NONE;
+	m_button_state = NONE;
 	if ((sf::Mouse::getPosition(window).x < 700) && (sf::Mouse::getPosition(window).x > 500) && (sf::Mouse::getPosition(window).y > 200) && (sf::Mouse::getPosition(window).y < 300)) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			button_state = ButtonState::START_GAME;
+			m_button_state = ButtonState::START_GAME;
 		}
 	}
 	if ((sf::Mouse::getPosition(window).x < 700) && (sf::Mouse::getPosition(window).x > 500) && (sf::Mouse::getPosition(window).y > 400) && (sf::Mouse::getPosition(window).y < 500)) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			button_state = ButtonState::CLOSE;
+			m_button_state = ButtonState::CLOSE;
 		}
 	}
-	window.draw(menu_sprite);
-	for (auto it = button_vector.begin(); it != button_vector.end(); it++) {
+	window.draw(m_menu_sprite);
+	for (auto it = m_button_vector.begin(); it != m_button_vector.end(); it++) {
 		(*it)->draw(window);
 	}
 }

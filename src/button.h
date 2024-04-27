@@ -4,8 +4,8 @@
 class Button
 {
 private:
-	sf::Texture button_texture;
-	sf::Sprite button_sprite;
+	sf::Texture m_button_texture;
+	sf::Sprite m_button_sprite;
 public:
 	Button() = default;
 	Button(int, int, std::string);

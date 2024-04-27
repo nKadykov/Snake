@@ -3,10 +3,10 @@
 #include "menu.h"
 #include "gameoverwindow.h"
 
-const int snake_square = 50;
-const int snake_width = 1280 / snake_square;
-const int snake_height = 720 / snake_square;
-const int snake_length = 4;
+const int m_snake_square = 50;
+const int m_snake_width = 1280 / m_snake_square;
+const int m_snake_height = 720 / m_snake_square;
+const int m_snake_length = 4;
 
 enum class GameState {MENU, SNAKE, GAME_OVER};
 
@@ -14,11 +14,11 @@ int main() {
 
 	srand(time(nullptr));
 
-	sf::RenderWindow window(sf::VideoMode(snake_square * snake_width, snake_square * snake_height), "Snake");
+	sf::RenderWindow window(sf::VideoMode(m_snake_square * m_snake_width, m_snake_square * m_snake_height), "Snake");
 
 	sf::Texture snake_texture;
 	snake_texture.loadFromFile("resources/Snake.png");
-	sf::Sprite snake_sprite(snake_texture);
+	sf::Sprite m_snake_sprite(snake_texture);
 
 	sf::Texture gameover_texture;
 	gameover_texture.loadFromFile("resources/back1.jpg");
@@ -31,9 +31,9 @@ int main() {
 	GameOverWindow gameover_window;
 	gameover_window.setPosition(300, 200);
 	GameState game_state = GameState::MENU;
-	Snake* pSnake = new Snake(2, snake_width, snake_height, snake_square, snake_length, 1, 1, snake_sprite);
+	Snake* pSnake = new Snake(2, m_snake_width, m_snake_height, m_snake_square, m_snake_length, 1, 1, m_snake_sprite);
 
-	SnakeState snake_state = SnakeState::ON;
+	SnakeState m_snake_state = SnakeState::ON;
 
 	while (window.isOpen()) {
 
@@ -49,36 +49,36 @@ int main() {
 		}
 
 		if (pSnake) {
-			snake_state = pSnake->getState();
+			m_snake_state = pSnake->getState();
 		}
-		MenuState menu_state = menu.getState();
-		ButtonState button_state = menu.getButtonState();
+		MenuState m_menu_state = menu.getState();
+		ButtonState m_button_state = menu.getButtonState();
 		GameOverState gameover_state = gameover_window.getState();
 
-		if (snake_state == SnakeState::LOSE && pSnake) {
+		if (m_snake_state == SnakeState::LOSE && pSnake) {
 			game_state = GameState::GAME_OVER;
 			if (pSnake) {
 				delete pSnake;
 				pSnake = nullptr;
 			}
 		}
-		else if (snake_state == SnakeState::MENU || gameover_state == GameOverState::MENU) {
+		else if (m_snake_state == SnakeState::MENU || gameover_state == GameOverState::MENU) {
 			game_state = GameState::MENU;
 			gameover_window.setState(GameOverState::ON);
 			if (pSnake) {
 				delete pSnake;
 				pSnake = nullptr;
 			}
-			snake_state = SnakeState::ON;
+			m_snake_state = SnakeState::ON;
 		}
 
-		else if (gameover_state == GameOverState::OFF || button_state == ButtonState::START_GAME) {
+		else if (gameover_state == GameOverState::OFF || m_button_state == ButtonState::START_GAME) {
 			game_state = GameState::SNAKE;
 			menu.setButtonState(ButtonState::NONE);
 			gameover_window.setState(GameOverState::ON);
-			pSnake = new Snake(2, snake_width, snake_height, snake_square, snake_length, 1, 1, snake_sprite);
+			pSnake = new Snake(2, m_snake_width, m_snake_height, m_snake_square, m_snake_length, 1, 1, m_snake_sprite);
 		}
-		else if (button_state == ButtonState::CLOSE) {
+		else if (m_button_state == ButtonState::CLOSE) {
 			window.close();
 		}
 

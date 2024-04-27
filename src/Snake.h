@@ -10,15 +10,14 @@ private:
 		int x;
 		int y;
 	};
-	std::vector<SnakePoint> snake_vector;
-	int snake_direction = 2;
-	int snake_width = 30;
-	int snake_height = 30;
-	int snake_square;
-	int snake_length = 4;
-	SnakeState snake_state = SnakeState::ON;
-
-	sf::Sprite snake_sprite;
+	std::vector<SnakePoint> m_snake_vector;
+	int m_snake_direction = 2;
+	int m_snake_width = 30;
+	int m_snake_height = 30;
+	int m_snake_square;
+	int m_snake_length = 4;
+	SnakeState m_snake_state = SnakeState::ON;
+	sf::Sprite m_snake_sprite;
 public:
 	Snake() = delete;
 	Snake(int, int, int, int, int, int, int, sf::Sprite&);
