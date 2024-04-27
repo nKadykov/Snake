@@ -30,7 +30,7 @@
     <ClInclude Include="src\button.h" />
     <ClInclude Include="src\gameoverwindow.h" />
     <ClInclude Include="src\menu.h" />
-    <ClInclude Include="src\Snake.h" />
+    <ClInclude Include="src\snake.h" />
     <ClInclude Include="src\target.h" />
   </ItemGroup>
   <ItemGroup>

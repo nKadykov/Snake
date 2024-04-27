@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "gameoverwindow.h"
 
-const int SQUARE = 50;
+const int SQUARE = 150;
 const int WIDTH = 1280 / SQUARE;
 const int HEIGHT = 720 / SQUARE;
 const int LENGTH = 4;

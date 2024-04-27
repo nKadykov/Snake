@@ -9,7 +9,6 @@ Snake::Snake(int direction, int width, int height, int square, int length, int p
 	m_snake_square = square;
 	m_snake_length = length;
 	m_snake_state = SnakeState::ON;
-	m_snake_vector.resize(100);
 	for (int i = 0; i < m_snake_length; i++) {
 		m_snake_vector.push_back(SnakePoint());
 	}
@@ -59,7 +58,7 @@ void Snake::Start(sf::RenderWindow& window) {
 
 	sf::Clock clock;
 	float timer = 0;
-	float delay = 0.1;
+	float delay = 0.2;
 
 	while (window.isOpen() && m_snake_state == SnakeState::ON) {
 
@@ -102,7 +101,23 @@ void Snake::Start(sf::RenderWindow& window) {
 
 			target_point = target.getTargetPoint();
 
-			for (int i = m_snake_length; i > 0; i--) {
+
+			if ((m_snake_vector[0].x == target_point.x) && (m_snake_vector[0].y == target_point.y)) {
+				m_snake_length++;
+				m_snake_vector.push_back(SnakePoint());
+				int target_x = rand() % m_snake_width;
+				int target_y = rand() % m_snake_width;
+				for (int i = 0; i < m_snake_length; i++) {
+					if (target_x == m_snake_vector[i].x && target_y == m_snake_vector[i].y) {
+						target_x = rand() % m_snake_width;
+						target_y = rand() % m_snake_width;
+						i = 0;
+					}
+				}
+				target.setTargetPoint(rand() % (m_snake_width * m_snake_square / m_snake_square), rand() % (m_snake_height * m_snake_square / m_snake_square));
+			}
+
+			for (int i = m_snake_length - 1; i > 0; i--) {
 				m_snake_vector[i].x = m_snake_vector[i - 1].x;
 				m_snake_vector[i].y = m_snake_vector[i - 1].y;
 			}
@@ -133,20 +148,6 @@ void Snake::Start(sf::RenderWindow& window) {
 			}
 			if (m_snake_vector[0].y < 0) {
 				m_snake_vector[0].y = m_snake_height;
-			}
-
-			if ((m_snake_vector[0].x == target_point.x) && (m_snake_vector[0].y == target_point.y)) {
-				m_snake_length++;
-				int target_x = rand() % m_snake_width;
-				int target_y = rand() % m_snake_width;
-				for (int i = 0; i < m_snake_length; i++) {
-					if (target_x == m_snake_vector[i].x && target_y == m_snake_vector[i].y) {
-						target_x = rand() % m_snake_width;
-						target_y = rand() % m_snake_width;
-						i = 0;
-					}
-				}
-				target.setTargetPoint(rand() % (m_snake_width * m_snake_square / m_snake_square), rand() % (m_snake_height * m_snake_square / m_snake_square));
 			}
 
 			for (int i = 2; i < m_snake_length; i++) {
