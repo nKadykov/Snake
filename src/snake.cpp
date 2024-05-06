@@ -58,7 +58,7 @@ void Snake::Start(sf::RenderWindow& window) {
 
 	sf::Clock clock;
 	float timer = 0;
-	float delay = 0.2;
+	float delay = 0.1;
 
 	while (window.isOpen() && m_snake_state == SnakeState::ON) {
 
@@ -101,22 +101,6 @@ void Snake::Start(sf::RenderWindow& window) {
 
 			target_point = target.getTargetPoint();
 
-
-			if ((m_snake_vector[0].x == target_point.x) && (m_snake_vector[0].y == target_point.y)) {
-				m_snake_length++;
-				m_snake_vector.push_back(SnakePoint());
-				int target_x = rand() % m_snake_width;
-				int target_y = rand() % m_snake_width;
-				for (int i = 0; i < m_snake_length; i++) {
-					if (target_x == m_snake_vector[i].x && target_y == m_snake_vector[i].y) {
-						target_x = rand() % m_snake_width;
-						target_y = rand() % m_snake_width;
-						i = 0;
-					}
-				}
-				target.setTargetPoint(rand() % (m_snake_width * m_snake_square / m_snake_square), rand() % (m_snake_height * m_snake_square / m_snake_square));
-			}
-
 			for (int i = m_snake_length - 1; i > 0; i--) {
 				m_snake_vector[i].x = m_snake_vector[i - 1].x;
 				m_snake_vector[i].y = m_snake_vector[i - 1].y;
@@ -148,6 +132,24 @@ void Snake::Start(sf::RenderWindow& window) {
 			}
 			if (m_snake_vector[0].y < 0) {
 				m_snake_vector[0].y = m_snake_height;
+			}
+
+			if ((m_snake_vector[0].x == target_point.x) && (m_snake_vector[0].y == target_point.y)) {
+				int target_x = rand() % m_snake_width;
+				int target_y = rand() % m_snake_width;
+				for (int i = 0; i < m_snake_length; i++) {
+					if (target_x == m_snake_vector[i].x && target_y == m_snake_vector[i].y) {
+						target_x = rand() % m_snake_width;
+						target_y = rand() % m_snake_width;
+						i = 0;
+					}
+				}
+				m_snake_length++;
+				int new_x = m_snake_vector.back().x;
+				int new_y = m_snake_vector.back().y;
+				SnakePoint new_point{ new_x, new_y };
+				m_snake_vector.push_back(new_point);
+				target.setTargetPoint(rand() % m_snake_width, rand() % m_snake_height);
 			}
 
 			for (int i = 2; i < m_snake_length; i++) {
