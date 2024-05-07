@@ -58,7 +58,7 @@ void Snake::Start(sf::RenderWindow& window) {
 
 	sf::Clock clock;
 	float timer = 0;
-	float delay = 0.1;
+	float delay = 0.2;
 
 	while (window.isOpen() && m_snake_state == SnakeState::ON) {
 

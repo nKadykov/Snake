@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "gameoverwindow.h"
 
-const int SQUARE = 50;
+const int SQUARE = 150;
 const int WIDTH = 1280 / SQUARE;
 const int HEIGHT = 720 / SQUARE;
 const int LENGTH = 4;
@@ -34,7 +34,7 @@ int main() {
 	menu.addButton(500, 400, button_texture_2);
 
 	GameOverWindow gameover_window;
-	gameover_window.setPosition(300, 200);
+	gameover_window.setPosition(300, 150);
 	GameState game_state = GameState::MENU;
 	Snake* pSnake = new Snake(2, WIDTH, HEIGHT, SQUARE, LENGTH, 1, 1, snake_sprite);
 

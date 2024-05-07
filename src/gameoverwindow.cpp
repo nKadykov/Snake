@@ -12,7 +12,6 @@ GameOverWindow::GameOverWindow() {
 
 void GameOverWindow::setPosition(float positionX, float positionY) {
 	m_sprite.setPosition(positionX, positionY);
-	m_button_sprite.setPosition(230, 300);
 }
 
 GameOverState GameOverWindow::getState() {
@@ -27,7 +26,7 @@ void GameOverWindow::draw(sf::RenderWindow& window) {
 	m_state = GameOverState::ON;
 	window.clear();
 
-	Button button(230, 300, m_button_texture);
+	Button button(230, 250, m_button_texture);
 	if (button.isPushed(window)) {
 		m_state = GameOverState::OFF;
 	}
